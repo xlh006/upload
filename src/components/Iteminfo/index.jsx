@@ -48,14 +48,15 @@ export default class Iteminfo extends Component{
     //     console.log(this.props)
     // }
 
-
-
-
-
+    newdate = (date) =>{
+        let tmp = new Date(date).toLocaleString();
+        return tmp;
+    }
 
 
     render(){
-        const {id,src,size,mtimeMs,check} = this.props
+        const {id,src,size,date,check} = this.props
+        
         return(
             
             <tr>
@@ -69,9 +70,9 @@ export default class Iteminfo extends Component{
                 </td>
                 <td>{src}</td>
                 <td>{size}</td>
-                <td>{mtimeMs}</td>
+                <td>{this.newdate(date)}</td>
                 <td>
-                        <button onClick={()=> this.download(id) } className="btn btn-info mr-1">Download</button>
+                        <button onClick={()=> this.download(id) } className="btn btn-primary">Download</button>
                         <button onClick={()=> this.delete(src,id) } className="btn btn-danger">Delete</button>
                 </td>
             </tr>

@@ -4,33 +4,22 @@ import decode from "jwt-decode";
 
 export default class Login extends Component {
 
-	state = {
-		nowdata:1000
-	}
-
-
-
     sendpassword = async(e) =>{
 		e.preventDefault();
 		console.log('password:',this.state.password)
         const {data} = await this.props.loginlogin(this.state.password)
 		if(data.code === 0){
 			// 存储 TOKEN 到本地
-			console.log(data)
+			console.log('data:',data)
 			localStorage.setItem('@#@TOKEN', data.token);
 
 			// 同步用户状态和用户信息到 Redux
 			this.props.loginsync(decode(data.token));
-			let a_tag = document.createElement("a");
-			a_tag.href = './api1/';
-			a_tag.click();
-			a_tag = null;
-
+			localStorage.setItem('endtime',data.endtime);
+			this.props.setendtime(data.endtime)
+			this.props.setlogin()
 		}
-
-
     }
-
 
 	handleChange = e => {
 		this.setState({

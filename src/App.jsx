@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 // import {Route} from 'react-router-dom'
 import Tableinfo from './components/Tableinfo'
-// import Userinfo from './components/Userinfo'
+import Userinfo from './components/Userinfo'
 import Upload from './components/Upload'
 import Footer from './components/Footer'
 import Logout from './components/Logout'
@@ -28,14 +28,13 @@ export default class App extends Component {
   state = {
     id:111,
     islogin:false,
-    timevalue:100,
-    starttime:1000000,
+    endtime:10799,
     allfiles:[
         {
           id:'1',
           src: 'AccInfo.dat',
           size: 1333,
-          mtimeMs: '1629998141401.4275MB',
+          date: '1629998141401.4275MB',
           isDirectory: false,
           check:true
         },
@@ -43,94 +42,37 @@ export default class App extends Component {
           id:'2',
           src: 'aconfig.dat',
           size: 4131,
-          mtimeMs: 1629998141401.4275,
-          isDirectory: false,
-          check:false
-        },
-        {
-          id:'3',
-          src: 'config01.dat',
-          size: 2910,
-          mtimeMs: 1629998141402.4258,
-          isDirectory: false,
-          check:false
-        },
-        {
-          id:'4',
-          src: 'configApplet.dat',
-          size: 2658,
-          mtimeMs: 1629998141401.4275,
-          isDirectory: false,
-          check:false
-        },
-        {
-          id:'5',
-          src: 'e4cb8d7c.ini',
-          size: 91,
-          mtimeMs: 1629998141401.4275,
-          isDirectory: false,
-          check:false
-        },
-        {
-          id:'6',
-          src: 'e4cb8d7c.ini1625050661',
-          size: 91,
-          mtimeMs: 1629998141401.4275,
-          isDirectory: false,
-          check:false
-        },
-        {
-          id:'7',
-          src: 'e4cb8d7c.ini1625147325',
-          size: 91,
-          mtimeMs: 1629998141401.4275,
-          isDirectory: false,
-          check:true
-        },
-        {
-          id:'8',
-          src: 'e4cb8d7c.ini1625285918',
-          size: 91,
-          mtimeMs: 1629998141401.4275,
-          isDirectory: false,
-          check:false
-        },
-        {
-          id:'9',
-          src: 'e4cb8d7c.ini1625475567',
-          size: 91,
-          mtimeMs: 1629998141401.4275,
-          isDirectory: false,
-          check:true
-        },
-        {
-          id:'10',
-          src: 'js',
-          size: 0,
-          mtimeMs: 1626409163890.8723,
-          isDirectory: true,
-          check:true
-        },
-        {
-          id:'11',
-          src: 'verify.html',
-          size: 2702,
-          mtimeMs: 1626409859378.152,
+          date: 1629998141401.4275,
           isDirectory: false,
           check:false
         }
     ]
+  }
+  
 
-}
+  compare(date) {
+    return function(m,n){
+      let a = new Date(m[date]);
+      let b = new Date(n[date]);
+      return b - a; //降序
+    }
+  }
 
-
+  //componentDidMount()在render()之后立即执行,这里可以使用setState()方法触发重新渲染(re-render)
   componentDidMount(){
+    //在生命周期之中只能使用 _this 代替 this 吗？
     const _this = this
     console.log('localStorage',localStorage)
 
     axios.get('./api1/data').then(res=>{
       console.log('getAllfiles')
       console.log(res.data)
+      console.log('res.data1',res.data)
+      res.data.sort(_this.compare('date'))
+      console.log('res.data2',res.data)
+
+
+
       _this.setState({
         allfiles:res.data
       });
@@ -138,21 +80,44 @@ export default class App extends Component {
       console.log(err)
     })
   
-    const tk = localStorage.getItem('@#@TOKEN');
-    const islogin = tk?true:false;
-    this.setState({islogin:islogin})
 
+
+
+    const tk = localStorage.getItem('@#@TOKEN');
+    const endtime = localStorage.getItem('endtime');
+    const islogin = tk?true:false;
+    this.setState({
+      islogin:islogin,
+      endtime:parseInt(endtime)
+    })
   }
 
 
+  componentDidUpdate(){
+    let tmp = 1;
+    tmp++;
+  }
 
 
   setstarttime = (data) => {
     console.log(data)
     this.setState({starttime:data})
     this.setState({id:222})
-    console.log('设置成功设置成功设置成功设置成功设置成功设置成功设成功设置成功设置成功设置成功设置成功设置成功')
+    console.log('')
   }
+
+  setendtime = (i) => {
+    this.setState({
+      endtime:i
+    })
+  }
+
+  setlogin = () => {
+    this.setState({
+      islogin:true
+    })
+  }
+
   //删除文件
   deletefile = (id) => {
     const {allfiles} = this.state
@@ -244,41 +209,42 @@ export default class App extends Component {
 			if(fileObj.id === id) return {...fileObj,check}
 			else return fileObj
 		})
+
+
+
+
+
+
 		this.setState({allfiles:newallfiles})
 	}
 
+  updateitem = (i) =>{
+    this.setState({
+      allfiles:i
+    })
+  }
 
 
 
-
-
-  
   render() {
     
-    const {allfiles} = this.state
+    const {allfiles,endtime} = this.state
 		return (
       
       <div className="container">
-        
-
-
-
-
-
         {/* <Navigator/> */}
         {/* <Route path='/login' component={Login} />
             <Route path='/register' component={Register} /> */}
-        <Login starttime={this.setstarttime}/> 
-        {/* <Userinfo/> */}
-
-
+        <Login starttime={this.endtime} setendtime={this.setendtime} setlogin={this.setlogin}/> 
         <Logout/>
         <Home/>
+        
 
         { 
           this.state.islogin?
             <div>
-              <Upload/>
+              <Userinfo endtime={endtime} setendtime={this.setendtime}/>
+              <Upload updateitem={this.updateitem}/>
               <Tableinfo  allfiles={allfiles} updatefile={this.updatefile} deletefile={this.deletefile} downloadfile={this.downloadfile} />
               <Footer allfiles={allfiles} checkallfiles={this.checkallfiles} clearallfiles={this.clearallfiles} downloadfiles={this.downloadfiles}/>
             </div>

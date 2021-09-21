@@ -46,7 +46,7 @@ export default class Footer extends Component {
 				
 				
 				<span style={{textAlign:'center',marginLeft:'30px',paddingBottom:'100px'}}>已选择{doneCount} / 全部{total} </span>
-				<button onClick={this.downloadcheckfiles} className="btn btn-info mr-1">下载已选择文件</button>
+				<button onClick={this.downloadcheckfiles} className="btn btn-primary">下载已选择文件</button>
 				<button onClick={this.handleclearAllfiles} className="btn btn-danger">删除已选择文件</button>
 
 			</div>
