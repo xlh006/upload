@@ -1,0 +1,11 @@
+.custom {
+    width: 50% !important;
+}
+
+.src  {
+    width: 100% !important;
+    float:right !important;
+}
+.btnleft {
+    padding-left: 0 !important;
+  }

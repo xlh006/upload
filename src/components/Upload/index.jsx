@@ -58,7 +58,7 @@ export default class Upload extends Component{
                 <div className="input-group">
                     <div className="custom-file">
                         <input onChange={this.uploadchange} type="file" className="custom-file-input" ref={this.inputGroupFile04} aria-describedby="inputGroupFileAddon04" multiple/>
-                        <label className="custom-file-label" htmlFor="inputGroupFile04"><span>{this.state.show}</span></label>
+                        <label className="custom-file-label" htmlFor="inputGroupFile04"><span><font color="#EB4537">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{this.state.show}</font></span></label>
                     </div>
                     <div className="input-group-append">
                         <button onClick={this.upload} className="btn btn-success" type="button" id="inputGroupFileAddon04">Upload</button>

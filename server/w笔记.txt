@@ -1,0 +1,48 @@
+let 声明的变量只在 let 命令所在的代码块内有效。
+const 声明一个只读的常量，一旦声明，常量的值就不能改变。
+
+path.extname() 方法返回 path 的扩展名，即 path 的最后一部分中从最后一次出现的 .（句点）字符到字符串的结尾。
+http://nodejs.cn/api/path.html#path_path_extname_path
+
+arrayObject.slice(start,end)，start 必需。end 可选。 方法可从已有的数组中返回选定的元素。
+返回值
+返回一个新的数组，包含从 start 到 end （不包括该元素）的 arrayObject 中的元素。
+说明
+请注意，该方法并不会修改数组，而是返回一个子数组。如果想删除数组中的一段元素，应该使用方法 Array.splice()。
+注释：您可使用负值从数组的尾部选取元素。
+
+在node.js中，http协议如果不设置响应头，中文的话在客户端浏览器是会乱码的，那么设置响应头的目的是什么，又如何设置响应头？
+目的是为了告诉浏览器我发送的数据是什么类型的，你应该用什么格式来编码显示。如果不设置，会自动生成一个响应头，但中文的话浏览器会乱码。
+在http协议中， Content-type就是用来告诉对方我给你发送的数据内容是什么类型
+res.writeHead()的写法：
+参数1：必选，三位数的http状态码
+参数2：可选，可有可无
+参数3：可选，告诉浏览器我发给你的数据是什么类型的
+res.writeHead(200, { 'Content-type': 'text/html;charset=utf-8' })
+
+
+onkeypress 事件会在键盘按键被按下并释放一个键时发生。
+submit_password.click() 当点击元素时，会发生 click 事件。
+
+1.事件名前一般都以on开头；
+2.方法是程序员写语句直接调用，即显示调用；【可以触发onclick事件】　　3.事件不需程序员调用，但是，必须由程序员写一个函数且将该函数赋值给相应的事件，其调用是在相应的事件触发时。【告诉浏览器在鼠标点击时候要做什么】所以调用顺序是：首先方法其次事件。
+
+data - 当有数据可读时触发。
+end - 没有更多的数据可读时触发。
+'end' 事件只有在数据被完全消费掉后才会触发。
+
+
+indexOf() 
+如果未找到该值，则返回 -1。
+
+
+去除字符串的头尾空格:.trim()
+
+
+Node 接口的 textContent 属性表示一个节点及其后代的文本内容。 返回值 一个字符串或 null.
+(<span id="fileCounthtml">0</span>个文件):
+                    fileCounthtml.textContent = AllFileData.length;
+
+
+
+

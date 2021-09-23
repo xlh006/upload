@@ -2,6 +2,7 @@ import React,{ Component } from 'react'
 import './index.css'
 import { connect } from 'react-redux';
 import {logout} from '../../redux/login_action'
+
 import axios from 'axios';
 
 
@@ -23,7 +24,6 @@ class Userinfo extends Component{
         let now = new Date();
         countdown = this.props.endtime - now.getTime();
         countdown = Math.floor(countdown/1000);
-        console.log('countdown:',countdown)
         this.countDown();
     }
 
@@ -59,7 +59,6 @@ class Userinfo extends Component{
             this.props.logout()
         }
 
-        console.log('tmptime',countdown)
         let hour = parseInt(countdown / (60 * 60));
         let minute = parseInt((countdown % 3600) / 60);
         let second = parseInt(countdown % 60);
@@ -96,13 +95,16 @@ class Userinfo extends Component{
 
                 <div style={{float:'left', fontSize:'16px',fontFamily:'inherit',fontWeight:500}}>
                     <span style={{fontSize:'18px',fontFamily:'inherit',fontWeight:500}}>Countdown:<span style={{fontSize:'22px'}}>{this.state.hour}:{this.state.minute}:{this.state.second}</span></span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     {/* <a className="btn btn-outline-danger btn-sm btn-space" href="" role="button" onClick={this.props.logout}>清空并退出</a>*/}
-                    <a className="btn btn-outline-danger btn-sm btn-space" style={{position:'relative',bottom:'3px'}} href="" role="button" onClick={this.props.logout}>清空并退出</a> 
+                    <a className="btn btn-outline-info btn-sm btn-space" style={{position:'relative',bottom:'4.5px'}} href="" role="button" onClick={this.props.logout}>清空并退出</a> 
                     <button className="btn btn-outline-primary btn-sm btn-space" style={{position:'relative',top:'2px'}} onClick={this.addonehour}>增加一小时</button>
                     {/* <button className="btn btn-outline-danger btn-sm btn-space">清空并退出</button> */}
                 </div>
                 <div style={{clear:'both'}}></div>
+
+
+
             </div>
         )
     }

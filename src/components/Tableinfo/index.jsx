@@ -1,20 +1,22 @@
 import React,{ Component } from 'react'
 import Iteminfo from '../Iteminfo'
+// import Modal from '../Modal'
+import { Modal } from 'antd';
 // import './index.css'
-
 
 export default class Tableinfo extends Component{
 
-
+    state = {
+      visible: false
+    }
 
     render(){
         const {allfiles,updatefile,deletefile,downloadfile} = this.props
-
-
+        const {visible} = this.state
         return(
           
             <div>
-              {/* {this.newedit()} */}
+              <div>
                 <div>
                     <h5>文件列表（共{allfiles.length}个文件）</h5>
                 </div>
@@ -27,7 +29,7 @@ export default class Tableinfo extends Component{
                       <th>
                           <span style={{textAlign:'center',display:'block'}}>Check</span>
                       </th>
-                      <th><span style={{textAlign:'center',display:'block'}}>文件路径</span></th>
+                      <th><span style={{textAlign:'center',display:'block'}}>文件名</span></th>
                       <th><span style={{textAlign:'center',display:'block'}}>文件大小</span></th>
                       <th><span style={{textAlign:'center',display:'block'}}>创建时间</span></th>
                       <th><span style={{textAlign:'center',display:'block'}}>操作</span></th>
@@ -39,6 +41,7 @@ export default class Tableinfo extends Component{
                         return <Iteminfo
                                   key={file.id}
                                   {...file}
+                                  visible = {visible}
                                   updatefile = {updatefile}
                                   deletefile = {deletefile}
                                   downloadfile = {downloadfile}
@@ -47,6 +50,12 @@ export default class Tableinfo extends Component{
                     }
                   </tbody>
                 </table>
+                
+              </div>
+              
+              <Modal visible={visible}></Modal>
+
+
             </div>
         )
     }

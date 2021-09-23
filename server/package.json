@@ -1,0 +1,14 @@
+{
+  "name": "zp_file_server",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "node ./app.js"
+  },
+  "dependencies": {
+    "formidable": "^1.2.1",
+    "jsonwebtoken": "^8.5.1",
+    "nanoid": "^3.1.25",
+    "node-uuid": "^1.4.8",
+    "zip-local": "^0.3.4"
+  }
+}

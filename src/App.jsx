@@ -30,22 +30,6 @@ export default class App extends Component {
     islogin:false,
     endtime:10799,
     allfiles:[
-        {
-          id:'1',
-          src: 'AccInfo.dat',
-          size: 1333,
-          date: '1629998141401.4275MB',
-          isDirectory: false,
-          check:true
-        },
-        {
-          id:'2',
-          src: 'aconfig.dat',
-          size: 4131,
-          date: 1629998141401.4275,
-          isDirectory: false,
-          check:false
-        }
     ]
   }
   
@@ -224,8 +208,6 @@ export default class App extends Component {
     })
   }
 
-
-
   render() {
     
     const {allfiles,endtime} = this.state
@@ -254,7 +236,6 @@ export default class App extends Component {
             </div>
         }
         
-        {/* <Counttime remaining={this.state.remaining}/> */}
 
       </div>
 		)
